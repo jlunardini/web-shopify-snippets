@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTS Pro Services - New Home Exploration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --secondary-color: #4ea8c3;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .home-hero {
+            min-height: 400px;
+            background-image: url('assets/home-hero-desktop.webp');
+            background-size: cover;
+            background-position: bottom right;
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .home-hero .home-hero-content {
+            padding: 0 0 0 80px;
+            margin-top: 24px;
+        }
+
+
+        .home-hero h1 {
+            font-size: 64px;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .home-hero h1,
+        .home-hero-content p {
+            color: #ffffff;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .home-hero h1 .highlight-light-blue {
+            color: var(--secondary-color);
+        }
+
+        .home-hero-content button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 140px;
+            cursor: pointer;
+        }
+
+        /* 3 column info section */
+
+        .info-3-col {
+            padding: 64px 120px;
+        }
+
+        .info-3-col-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .info-3-col-content .col {
+            flex: 1 1 0;
+            width: auto;
+        }
+
+        .yearbook {
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 64px;
+            background-image:
+                linear-gradient(rgba(217, 217, 217, 0.75), rgba(217, 217, 217, 0.75)),
+                url('assets/yearbook-collage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .yearbook h2 {
+            font-size: 64px;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .yearbook img {
+            max-width: 500px;
+        }
+
+        /* info 3 col button */
+        .info-3-col-button {
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .info-3-col-button h2 {
+            width: 100%;
+            text-align: left;
+            font-size: 64px;
+            font-weight: 700;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .info-3-col-button button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 140px;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto;
+        }
+
+        /* Deployment Distraction */
+        .deployment-distraction {
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background: var(--secondary-color);
+            color: #ffffff;
+        }
+
+        .deployment-distraction button {
+            background: #ffffff;
+            color: var(--secondary-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 140px;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="home-hero">
+        <h1><span class="highlight-light-blue">We know</span><br> what keeps IT leaders up at night</h1>
+        <div class="home-hero-content">
+            <p>Most MSPs treat Macs like difficult Windows machines.</br> We LOVE Macs.</p>
+            <button>Get Your Reality Check</button>
+        </div>
+    </section>
+    <section class="info-3-col">
+        <h2>Why Your Mac Support Keeps Falling Short</h2>
+        <div class="info-3-col-content">
+            <div class="col">
+                <p><strong>They Say They Support Macs.</br> They Don’t.</strong></p>
+                <p>Your current MSP treats your Mac fleet like a problem to solve instead of an intentional choice.</p>
+            </div>
+            <div class="col">
+                <p><strong>Too Much, Too Little</strong></p>
+                <p>You’re managing infrastructure for 500 employees with a team of three (including yourself).
+                    Meanwhile, your CEO keeps asking why IT costs so much.</p>
+            </div>
+            <div class="col">
+                <p><strong>The Compliance Countdown</strong></p>
+                <p>Security threats evolve daily.
+                    Your Apple fleet is half-
+                    managed at best. And that
+                    audit deadline? It’s not moving.</p>
+            </div>
+        </div>
+    </section>
+    <section class="yearbook">
+        <div class="yearbook-content">
+            <h2>We Are The Mac Nerds Who Never Stopped Being Ourselves</h2>
+            <p>When you call MTS Pro Services, you get “Bob,” he’ll debate
+                Marvel vs. DC while architecting your Jamf deployment
+                with the kind of precision that turns security audits into
+                non-events. We’ve been together 25+ years for a reason.</p>
+        </div>
+        <div class="yearbook-image">
+            <img src="assets/yearbook-grid.png" alt="Yearbook Collage">
+        </div>
+    </section>
+    <section class="info-3-col-button">
+        <h2>We See What Others Miss</h2>
+        <div class="info-3-col-content">
+            <div class="col">
+                <p><strong>The Reality Check</strong></p>
+                <p>A Mac fleet assessment that
+                    uncovers security gaps and
+                    optimization issues across
+                    Jamf, Apple Business Manager,
+                    network security, backups,
+                    access controls, and more.</p>
+            </div>
+            <div class="col">
+                <p><strong>MTS Device Command</strong></p>
+                <p>We handle every single thing
+                    that happens to your Macs from
+                    the moment you order devices
+                    until they retire. Everything.</p>
+            </div>
+            <div class="col">
+                <p><strong>The Quarterly Reality Check</strong></p>
+                <p>Mac-specific guidance on OS
+                    updates, security patches, and
+                    Jamf optimizations, plus a
+                    check-in on expectations set in
+                    your first Reality Check.</p>
+            </div>
+        </div>
+        <button>Get Your Reality Check</button>
+    </section>
+    <section class="deployment-distraction">
+        <h2>Eliminate Deployment Distraction</h2>
+        <p><strong>We Built Talos Fleet Management for Apple Devices</strong></br>
+            in Apple enterprise for 30+ years with over 40,000 Macs in a single Jamf instance. We don’t treat Mac
+            deployments like modified Windows projects. We treat them like the sophisticated, security-critical
+            infrastructure they are.
+        </p>
+        <button>Learn More About Talos</button>
+    </section>
+
+</body>
+
+</html>
