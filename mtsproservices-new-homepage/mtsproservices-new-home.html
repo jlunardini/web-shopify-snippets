@@ -12,7 +12,8 @@
 
     <style>
         :root {
-            --secondary-color: #4ea8c3;
+            --secondary-color: rgba(78, 168, 195, 1.000);
+            --secondary-color-hover: rgba(78, 168, 195, 0.800);
         }
 
         body {
@@ -23,44 +24,79 @@
         }
 
         .home-hero {
-            min-height: 400px;
             background-image: url('assets/home-hero-desktop.webp');
             background-size: cover;
             background-position: bottom right;
-            padding: 64px 120px;
+            padding: 100px 120px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .home-hero {
+                padding: 80px 48px;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
         }
 
         .home-hero .home-hero-content {
-            padding: 0 0 0 80px;
-            margin-top: 24px;
+            padding: 0 0 0 0;
+            margin-top: 48px;
         }
-
 
         .home-hero h1 {
-            font-size: 64px;
+            font-size: 72px;
             font-family: 'Source Sans 3', sans-serif;
-        }
-
-        .home-hero h1,
-        .home-hero-content p {
-            color: #ffffff;
-            font-family: 'Source Sans 3', sans-serif;
+            line-height: 1;
+            width: 100%;
         }
 
         .home-hero h1 .highlight-light-blue {
             color: var(--secondary-color);
         }
 
+        @media (max-width: 1024px) {
+            .home-hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        .home-hero h1,
+        .home-hero-content p {
+            color: #ffffff;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+            text-wrap: pretty;
+        }
+
+        .home-hero-content p {
+            font-size: 36px;
+        }
+
+        @media (max-width: 1024px) {
+            .home-hero p {
+                font-size: 28px;
+            }
+        }
+
         .home-hero-content button {
             background-color: var(--secondary-color);
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 140px;
             cursor: pointer;
+            margin-top: 24px;
+            font-size: 24px;
+            font-family: 'Source Sans 3', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-hero-content button:hover {
+            background-color: var(--secondary-color-hover);
         }
 
         /* 3 column info section */
@@ -69,18 +105,60 @@
             padding: 64px 120px;
         }
 
+        @media (max-width: 1024px) {
+            .info-3-col {
+                padding: 100px 120px;
+            }
+        }
+
+        .info-3-col h2 {
+            font-size: 48px;
+            font-weight: 700;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+            text-wrap: pretty;
+            line-height: 1;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 1024px) {
+            .info-3-col h2 {
+                font-size: 42px;
+            }
+        }
+
         .info-3-col-content {
             display: flex;
+            z-index: 1;
             flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
+            justify-content: flex-start;
+            gap: 64px;
+            margin-top: 36px;
+        }
+
+        @media (max-width: 1024px) {
+            .info-3-col {
+                padding: 64px 48px;
+            }
+
+            .info-3-col-content {
+                flex-direction: column;
+                gap: 36px;
+            }
         }
 
         .info-3-col-content .col {
             flex: 1 1 0;
             width: auto;
         }
+
+        .info-3-col-content .col p {
+            font-size: 26px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+        }
+
+        /* Yearbook Section */
 
         .yearbook {
             padding: 64px 120px;
@@ -100,69 +178,222 @@
             background-repeat: no-repeat;
         }
 
+        @media (max-width: 1024px) {
+            .yearbook {
+                flex-direction: column;
+                padding: 100px 48px;
+            }
+        }
+
         .yearbook h2 {
-            font-size: 64px;
+            font-size: 48px;
+            line-height: 1;
             font-weight: 700;
             margin: 0;
             font-family: 'Source Sans 3', sans-serif;
+            text-wrap: pretty;
+        }
+
+        @media (max-width: 1024px) {
+            .yearbook h2 {
+                font-size: 42px;
+            }
+        }
+
+        .yearbook p {
+            font-size: 26px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 32px 0 0 0;
+            text-wrap: pretty;
         }
 
         .yearbook img {
             max-width: 500px;
         }
 
+        @media (max-width: 1024px) {
+            .yearbook img {
+                display: none;
+            }
+        }
+
         /* info 3 col button */
         .info-3-col-button {
-            padding: 64px 120px;
+            padding: 144px 120px 220px 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 24px;
+            background: white;
+            position: relative;
         }
 
         .info-3-col-button h2 {
             width: 100%;
+            color: var(--secondary-color);
             text-align: left;
-            font-size: 64px;
+            font-size: 48px;
+            line-height: 1;
             font-weight: 700;
+            margin: 0;
             font-family: 'Source Sans 3', sans-serif;
+            z-index: 1;
         }
 
         .info-3-col-button button {
             background-color: var(--secondary-color);
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 16px 32px;
             border-radius: 140px;
             cursor: pointer;
             font-family: 'Source Sans 3', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0 auto;
+            font-size: 24px;
+            font-weight: 300;
+            margin: 64px auto 0 auto;
+            transition: background-color 0.3s ease;
+        }
+
+        .info-3-col-button button:hover {
+            background-color: var(--secondary-color-hover);
+        }
+
+        .absolute-gear {
+            position: absolute;
+            top: 12px;
+            left: 24px;
+            z-index: 0;
+        }
+
+        .absolute-gear img {
+            height: 500px;
+            width: 400px;
+            object-fit: contain;
         }
 
         /* Deployment Distraction */
         .deployment-distraction {
-            padding: 64px 120px;
+            padding: 110px 120px 200px 120px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
             background: var(--secondary-color);
             color: #ffffff;
+            position: relative;
+        }
+
+        .deployment-distraction h2 {
+            font-size: 48px;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0 0 24px 0;
+            font-family: 'Source Sans 3', sans-serif;
+            z-index: 1;
+        }
+
+        .deployment-distraction p {
+            font-size: 26px;
+            font-family: 'Source Sans 3', sans-serif;
+            text-wrap: pretty;
+            padding: 0 64px 0 0;
+            margin: 0;
         }
 
         .deployment-distraction button {
             background: #ffffff;
             color: var(--secondary-color);
             border: none;
-            padding: 10px 20px;
+            padding: 16px 32px;
             border-radius: 140px;
             cursor: pointer;
             font-family: 'Source Sans 3', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 24px;
             align-self: flex-start;
+            margin-top: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        .deployment-distraction button:hover {
+            background-color: rgba(255, 255, 255, 0.800);
+        }
+
+        .deployment-distraction .talos-absolute {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10%;
+            z-index: 0;
+        }
+
+        .deployment-distraction .talos-absolute img {
+            height: 500px;
+            width: 400px;
+            object-fit: contain;
+            opacity: 0.20;
+        }
+
+        /* Footer CTA Banner */
+        .footer-cta-banner {
+            padding: 120px 120px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: white;
+        }
+
+        .footer-cta-banner h2 {
+            font-size: 46px;
+            line-height: 1;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin: 0;
+            text-wrap: pretty;
+            z-index: 1;
+        }
+
+        .footer-cta-banner p {
+            font-size: 24px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+            margin-top: 24px;
+            max-width: 600px;
+            text-wrap: pretty;
+            z-index: 1;
+        }
+
+        .footer-cta-banner button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 140px;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            margin: 64px auto 0 auto;
+            align-self: flex-start;
+            transition: background-color 0.3s ease;
+            z-index: 1;
+        }
+
+        .footer-cta-banner button:hover {
+            background-color: var(--secondary-color-hover);
+        }
+
+        .absolute-gear-footer {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            z-index: 0;
+        }
+
+        .absolute-gear-footer img {
+            height: 500px;
+            width: 400px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -171,7 +402,7 @@
     <section class="home-hero">
         <h1><span class="highlight-light-blue">We know</span><br> what keeps IT leaders up at night</h1>
         <div class="home-hero-content">
-            <p>Most MSPs treat Macs like difficult Windows machines.</br> We LOVE Macs.</p>
+            <p>Most MSPs treat Macs like difficult Windows machines.</br> <strong>We LOVE Macs.</strong></p>
             <button>Get Your Reality Check</button>
         </div>
     </section>
@@ -198,7 +429,7 @@
     </section>
     <section class="yearbook">
         <div class="yearbook-content">
-            <h2>We Are The Mac Nerds Who Never Stopped Being Ourselves</h2>
+            <h2>We Are The Mac Nerds </br> Who Never Stopped Being Ourselves</h2>
             <p>When you call MTS Pro Services, you get “Bob,” he’ll debate
                 Marvel vs. DC while architecting your Jamf deployment
                 with the kind of precision that turns security audits into
@@ -209,6 +440,9 @@
         </div>
     </section>
     <section class="info-3-col-button">
+        <div class="absolute-gear">
+            <img src="assets/gear-gray.svg" alt="Gear">
+        </div>
         <h2>We See What Others Miss</h2>
         <div class="info-3-col-content">
             <div class="col">
@@ -239,13 +473,26 @@
         <button>Get Your Reality Check</button>
     </section>
     <section class="deployment-distraction">
+        <div class="talos-absolute">
+            <img src="assets/talos.svg" alt="Talos">
+        </div>
         <h2>Eliminate Deployment Distraction</h2>
         <p><strong>We Built Talos Fleet Management for Apple Devices</strong></br>
-            in Apple enterprise for 30+ years with over 40,000 Macs in a single Jamf instance. We don’t treat Mac
-            deployments like modified Windows projects. We treat them like the sophisticated, security-critical
-            infrastructure they are.
+            Most MSPs have a couple of people who “know Jamf.” We have an entire team working exclusively in Apple
+            enterprise for 30+ years with over 40,000 Macs in a single Jamf instance. We don’t treat Mac deployments
+            like modified Windows projects. We treat them like the sophisticated, security-critical infrastructure they
+            are.
         </p>
         <button>Learn More About Talos</button>
+    </section>
+    <section class="footer-cta-banner">
+        <div class="absolute-gear-footer">
+            <img src="assets/gear-gray.svg" alt="Gear">
+        </div>
+        <h2>Ready To Work With Someone Who Actually Gets Macs? </h2>
+        <p>Let’s start with a conversation. Tell us where things stand,
+            and we’ll take it from there.</p>
+        <button>Get Your Reality Check</button>
     </section>
 
 </body>
