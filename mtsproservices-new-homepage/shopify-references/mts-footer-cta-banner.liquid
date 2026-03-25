@@ -1,0 +1,159 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-secondary-color: rgba(78, 168, 195, 1);
+    --mts-secondary-color-hover: rgba(78, 168, 195, 0.8);
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner {
+    padding: 120px 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: white;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner .page-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-footer-cta-banner {
+      padding: 80px 0;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner h2 {
+    font-size: 46px;
+    line-height: 1;
+    color: var(--mts-secondary-color);
+    font-weight: 700;
+    margin: 0;
+    text-wrap: pretty;
+    z-index: 1;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-footer-cta-banner h2 {
+      font-size: 36px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner p {
+    font-size: 24px;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 0;
+    margin-top: 24px;
+    max-width: 600px;
+    text-wrap: pretty;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner .mts-footer-cta-button {
+    display: inline-block;
+    background-color: var(--mts-secondary-color);
+    color: #ffffff;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 140px;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 64px auto 0 auto;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-cta-banner .mts-footer-cta-button:hover {
+    background-color: var(--mts-secondary-color-hover);
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear-footer {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear-footer img {
+    height: 500px;
+    width: 400px;
+    object-fit: contain;
+  }
+{%- endstyle -%}
+
+<div class="mts-footer-cta-banner" role="region" aria-labelledby="mts-footer-cta-heading-{{ section.id }}">
+  {% if section.settings.decor_image != blank %}
+    <div class="mts-absolute-gear-footer" aria-hidden="true">
+      <img
+        src="{{ section.settings.decor_image | image_url: width: 800 }}"
+        alt=""
+        width="{{ section.settings.decor_image.width }}"
+        height="{{ section.settings.decor_image.height }}"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 id="mts-footer-cta-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% if section.settings.button_label != blank %}
+      <a class="mts-footer-cta-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Home — Footer CTA",
+  "tag": "section",
+  "class": "section-mts-footer-cta-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "decor_image",
+      "label": "Decorative gear image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready To Work With Someone Who Actually Gets Macs?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Let’s start with a conversation. Tell us where things stand, and we’ll take it from there."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get Your Reality Check"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Home — Footer CTA"
+    }
+  ]
+}
+{% endschema %}

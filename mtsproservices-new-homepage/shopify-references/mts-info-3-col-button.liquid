@@ -1,0 +1,228 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-secondary-color: rgba(78, 168, 195, 1);
+    --mts-secondary-color-hover: rgba(78, 168, 195, 0.8);
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button {
+    padding: 144px 0 220px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button .page-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button .page-width > h2 {
+    align-self: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button .page-width > .mts-info-3-col-content {
+    align-self: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button h2 {
+    width: 100%;
+    color: var(--mts-secondary-color);
+    text-align: left;
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button .mts-info-3-col-button-cta {
+    display: inline-block;
+    background-color: var(--mts-secondary-color);
+    color: #ffffff;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 140px;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 64px auto 0 auto;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-button .mts-info-3-col-button-cta:hover {
+    background-color: var(--mts-secondary-color-hover);
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear {
+    position: absolute;
+    top: 12px;
+    left: max(1.5rem, env(safe-area-inset-left, 0px));
+    z-index: 0;
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear img {
+    height: 500px;
+    width: 400px;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-content {
+    display: flex;
+    z-index: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 64px;
+    margin-top: 36px;
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-info-3-col-button {
+      padding: 64px 0 120px 0;
+    }
+
+    #shopify-section-{{ section.id }} .mts-info-3-col-content {
+      flex-direction: column;
+      gap: 36px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-content .col {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  #shopify-section-{{ section.id }} .mts-info-3-col-content .col p {
+    font-size: 26px;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 0;
+  }
+{%- endstyle -%}
+
+<div class="mts-info-3-col-button" role="region" aria-labelledby="mts-info-3-col-button-heading-{{ section.id }}">
+  {% if section.settings.decor_image != blank %}
+    <div class="mts-absolute-gear" aria-hidden="true">
+      <img
+        src="{{ section.settings.decor_image | image_url: width: 800 }}"
+        alt=""
+        width="{{ section.settings.decor_image.width }}"
+        height="{{ section.settings.decor_image.height }}"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 id="mts-info-3-col-button-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+    {% endif %}
+    <div class="mts-info-3-col-content">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'column' %}
+            <div class="col" {{ block.shopify_attributes }}>
+              {% if block.settings.title != blank %}
+                <div class="rte">{{ block.settings.title }}</div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="rte">{{ block.settings.text }}</div>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    {% if section.settings.button_label != blank %}
+      <a class="mts-info-3-col-button-cta" href="{{ section.settings.button_link }}">
+        {{- section.settings.button_label -}}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Home — Info 3 col + CTA",
+  "tag": "section",
+  "class": "section-mts-info-3-col-button",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "decor_image",
+      "label": "Decorative gear image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We See What Others Miss"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get Your Reality Check"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "<p><strong>The Reality Check</strong></p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>A Mac fleet assessment that uncovers security gaps and optimization issues across Jamf, Apple Business Manager, network security, backups, access controls, and more.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info 3 col + CTA",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "<p><strong>The Reality Check</strong></p>",
+            "text": "<p>A Mac fleet assessment that uncovers security gaps and optimization issues across Jamf, Apple Business Manager, network security, backups, access controls, and more.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "<p><strong>MTS Device Command</strong></p>",
+            "text": "<p>We handle every single thing that happens to your Macs from the moment you order devices until they retire. Everything.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "<p><strong>The Quarterly Reality Check</strong></p>",
+            "text": "<p>Mac-specific guidance on OS updates, security patches, and Jamf optimizations, plus a check-in on expectations set in your first Reality Check.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

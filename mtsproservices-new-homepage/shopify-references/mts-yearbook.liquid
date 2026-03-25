@@ -1,0 +1,127 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .mts-yearbook {
+    padding: 64px 0;
+    {% if section.settings.background_image != blank %}
+      background-image: linear-gradient(rgba(217, 217, 217, 0.75), rgba(217, 217, 217, 0.75)),
+        url('{{ section.settings.background_image | image_url: width: 2000 }}');
+    {% else %}
+      background-color: #d9d9d9;
+    {% endif %}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #shopify-section-{{ section.id }} .mts-yearbook-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-yearbook {
+      padding: 100px 0;
+    }
+
+    #shopify-section-{{ section.id }} .mts-yearbook-inner {
+      flex-direction: column;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-yearbook-heading {
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-yearbook-heading {
+      font-size: 42px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-yearbook p {
+    font-size: 26px;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 32px 0 0 0;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-yearbook img {
+    max-width: 500px;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-yearbook-image {
+      display: none;
+    }
+  }
+{%- endstyle -%}
+
+<div class="mts-yearbook" role="region" aria-labelledby="mts-yearbook-heading-{{ section.id }}">
+  <div class="page-width mts-yearbook-inner">
+    <div class="mts-yearbook-content">
+      {% if section.settings.heading != blank %}
+        <div id="mts-yearbook-heading-{{ section.id }}" class="mts-yearbook-heading rte" role="heading" aria-level="2">
+          {{ section.settings.heading }}
+        </div>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="rte">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+    {% if section.settings.side_image != blank %}
+      <div class="mts-yearbook-image">
+        <img
+          src="{{ section.settings.side_image | image_url: width: 1000 }}"
+          alt="{{ section.settings.side_image.alt | escape }}"
+          width="{{ section.settings.side_image.width }}"
+          height="{{ section.settings.side_image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Yearbook",
+  "tag": "section",
+  "class": "section-mts-yearbook",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (collage)"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>We Are The Mac Nerds <br> Who Never Stopped Being Ourselves</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body",
+      "default": "<p>When you call MTS Pro Services, you get “Bob,” he’ll debate Marvel vs. DC while architecting your Jamf deployment with the kind of precision that turns security audits into non-events. We’ve been together 25+ years for a reason.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side image (desktop)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Home — Yearbook"
+    }
+  ]
+}
+{% endschema %}
