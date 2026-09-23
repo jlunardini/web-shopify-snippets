@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Already One of Us | MTS Pro Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /*
+        Shared tokens from the homepage and Our People pages:
+        --secondary-color / --secondary-color-hover, Source Sans 3,
+        and the pill button treatment (fill, radius, hover fade).
+      */
+      :root {
+        --secondary-color: rgba(13, 171, 198, 1);
+        --secondary-color-hover: rgba(13, 171, 198, 0.8);
+        --page-background: #e8e3e2;
+      }
+
+      body {
+        font-family: "Source Sans 3", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--page-background);
+        color: #1a1a1a;
+      }
+
+      .highlight-light-blue {
+        color: var(--secondary-color);
+      }
+
+      .existing-clients {
+        position: relative;
+        overflow: hidden;
+        padding: 56px 72px 80px;
+      }
+
+      .existing-clients-gear {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 340px;
+        height: auto;
+        pointer-events: none;
+        z-index: 0;
+        /* gear-gray.svg is #efefef, which disappears on this background.
+           Darken it so it reads as the watermark in the mock. */
+        filter: brightness(0.91);
+      }
+
+      .existing-clients-header,
+      .existing-clients-grid {
+        position: relative;
+        z-index: 1;
+      }
+
+      .existing-clients-header h1 {
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 1.05;
+        margin: 0;
+        text-wrap: pretty;
+      }
+
+      .existing-clients-header p {
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.35;
+        margin: 16px 0 0;
+        max-width: 650px;
+        text-wrap: pretty;
+      }
+
+       .existing-clients-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+        margin-top: 40px;
+      }
+
+      .existing-clients-card {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+        padding: 36px 28px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .existing-clients-card img {
+        height: 88px;
+        width: 88px;
+        object-fit: contain;
+        margin-bottom: 8px;
+      }
+
+      .existing-clients-card h2 {
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 12px 0 0;
+      }
+
+      .existing-clients-card p {
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 18wpx;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 8px 0 0;
+        flex: 1;
+        text-wrap: pretty;
+      }
+
+      /* Same pill, color, and hover as the homepage CTAs, sized for a card. */
+      .existing-clients-button {
+        display: inline-block;
+        margin-top: 28px;
+        background-color: var(--secondary-color);
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 140px;
+        cursor: pointer;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .existing-clients-button:hover {
+        background-color: var(--secondary-color-hover);
+      }
+
+      @media (max-width: 1024px) {
+        .existing-clients {
+          padding: 48px 48px 64px;
+        }
+
+        .existing-clients-header h1 {
+          font-size: 34px;
+        }
+
+        .existing-clients-gear {
+          width: 200px;
+          right: -20px;
+          opacity: 0.45;
+        }
+
+        .existing-clients-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .existing-clients {
+          padding: 36px 20px 48px;
+        }
+
+        .existing-clients-header h1 {
+          font-size: 30px;
+        }
+
+        .existing-clients-header p {
+          font-size: 18px;
+        }
+
+        .existing-clients-gear {
+          display: none;
+        }
+
+        .existing-clients-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .existing-clients-card h2 {
+          font-size: 24px;
+        }
+
+        .existing-clients-card p {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="existing-clients">
+      <img
+        class="existing-clients-gear"
+        src="images/services_gear.svg"
+        alt=""
+      />
+
+      <header class="existing-clients-header">
+        <h1>
+          Already One of Us? <span class="highlight-light-blue">Good.</span>
+        </h1>
+        <p>
+          Here's everything you need, all in one place. Whether
+          you need support, want to check on a repair, or need something from
+          the store, it's all right here.
+        </p>
+      </header>
+
+      <div class="existing-clients-grid">
+        <article class="existing-clients-card">
+          <img src="images/repairs.svg" alt="" />
+          <h2>Repairs</h2>
+          <p>
+            Something broken? Start a repair request and we'll take it from
+            there.
+          </p>
+          <a class="existing-clients-button" href="#repairs">Submit a Repair →</a>
+        </article>
+
+        <article class="existing-clients-card">
+          <img src="images/support_ticket.svg" alt="" />
+          <h2>Support Ticket</h2>
+          <p>Need help? Onboarding new user?</p>
+          <a class="existing-clients-button" href="#support"
+            >Submit a Ticket →</a
+          >
+        </article>
+
+        <article class="existing-clients-card">
+          <img src="images/shop_store.svg" alt="" />
+          <h2>Shop The Store</h2>
+          <p>
+            Need new hardware or an accessory? Shop the same gear we recommend
+            to our clients.
+          </p>
+          <a class="existing-clients-button" href="#store">Visit the Store →</a>
+        </article>
+
+        <article class="existing-clients-card">
+          <img src="images/warehousing.svg" alt="" />
+          <h2>Warehousing</h2>
+          <p>Want to see what you have in stock? Check out your warehouse</p>
+          <a class="existing-clients-button" href="#warehousing"
+            >Go to Warehousing →</a
+          >
+        </article>
+
+        <article class="existing-clients-card">
+          <img src="images/sales.svg" alt="" />
+          <h2>Sales Portal</h2>
+          <p>Need an invoice or your purchase history? It's all here.</p>
+          <a class="existing-clients-button" href="#sales"
+            >Go to the Sales Portal</a
+          >
+        </article>
+
+        <article class="existing-clients-card">
+          <img src="images/account_manager.svg" alt="" />
+          <h2>Account Manager</h2>
+          <p>
+            Got a question only your account manager can answer? Reach out
+            directly.
+          </p>
+          <a class="existing-clients-button" href="#account-manager">Connect</a>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

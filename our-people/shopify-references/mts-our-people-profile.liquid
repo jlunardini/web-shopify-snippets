@@ -1,0 +1,376 @@
+{%- liquid
+  assign heading_id = 'mts-our-people-profile-heading-' | append: section.id
+  assign has_section_heading = false
+  if section.settings.heading != blank
+    assign has_section_heading = true
+  endif
+  assign has_labeled_region = false
+  if has_section_heading or section.settings.name != blank
+    assign has_labeled_region = true
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .mts-our-people-profile {
+    position: relative;
+    padding: 60px 0;
+    background: white;
+  }
+
+  {% if section.settings.show_background %}
+    #shopify-section-{{ section.id }} .mts-our-people-profile {
+      background-color: {{ section.settings.background_color }};
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__gear {
+    display: none;
+  }
+
+  {% if section.settings.show_gear and section.settings.gear_image != blank %}
+    #shopify-section-{{ section.id }} .mts-our-people-profile__gear {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 20%;
+      height: 100%;
+      width: auto;
+      opacity: 0.75;
+      max-height: 420px;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: 0;
+    }
+  {% endif %}
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-profile__gear {
+      display: none;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__heading {
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 1;
+    margin: 0 0 36px 0;
+    width: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__inner {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-profile__inner {
+      flex-direction: column;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__featured-image img {
+    object-fit: cover;
+    width: 378px;
+    height: 337px;
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-profile__featured-image img {
+      margin: 0 auto 0 0;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__name {
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__title {
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__bio {
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1.5;
+    font-family: 'Source Sans 3', sans-serif;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__team-members {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member img,
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member-placeholder {
+    width: 176px;
+    height: 210px;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member img {
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member-placeholder {
+    background-color: #52a0b2;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member-name {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 16px 0 0 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-profile__member-title {
+    font-size: 20px;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+{%- endstyle -%}
+
+<div
+  class="mts-our-people-profile"
+  role="region"
+  {% if has_labeled_region %}
+    aria-labelledby="{{ heading_id }}"
+  {% endif %}
+>
+  {% if section.settings.show_gear and section.settings.gear_image != blank %}
+    <img
+      class="mts-our-people-profile__gear"
+      src="{{ section.settings.gear_image | image_url: width: 800 }}"
+      alt=""
+      width="{{ section.settings.gear_image.width }}"
+      height="{{ section.settings.gear_image.height }}"
+      loading="lazy"
+      aria-hidden="true"
+    >
+  {% endif %}
+
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 id="{{ heading_id }}" class="mts-our-people-profile__heading">
+        {{- section.settings.heading -}}
+      </h2>
+    {% endif %}
+
+    <div class="mts-our-people-profile__inner">
+      {% if section.settings.featured_image != blank %}
+        <div class="mts-our-people-profile__featured-image">
+          <img
+            src="{{ section.settings.featured_image | image_url: width: 800 }}"
+            alt="{{ section.settings.featured_image.alt | default: section.settings.name | escape }}"
+            width="{{ section.settings.featured_image.width }}"
+            height="{{ section.settings.featured_image.height }}"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
+
+      <div class="mts-our-people-profile__content">
+        {% if section.settings.name != blank %}
+          {% if has_section_heading %}
+            <h3 class="mts-our-people-profile__name">{{ section.settings.name }}</h3>
+          {% else %}
+            <h2 id="{{ heading_id }}" class="mts-our-people-profile__name">{{ section.settings.name }}</h2>
+          {% endif %}
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <p class="mts-our-people-profile__title">{{ section.settings.title }}</p>
+        {% endif %}
+        {% if section.settings.bio != blank %}
+          <div class="mts-our-people-profile__bio rte">{{ section.settings.bio }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="mts-our-people-profile__team-members">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'team_member' %}
+              <div class="mts-our-people-profile__member" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 400 }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.name | escape }}"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="mts-our-people-profile__member-placeholder" aria-hidden="true"></div>
+                {% endif %}
+                {% if block.settings.name != blank %}
+                  <p class="mts-our-people-profile__member-name">{{ block.settings.name }}</p>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <p class="mts-our-people-profile__member-title">{{ block.settings.title }}</p>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Our People — Profile",
+  "tag": "section",
+  "class": "section-mts-our-people-profile",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background",
+      "label": "Show background color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#e8e3e2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gear",
+      "label": "Show decorative gear",
+      "default": false,
+      "info": "Independent of the background setting. Hidden on mobile."
+    },
+    {
+      "type": "image_picker",
+      "id": "gear_image",
+      "label": "Gear image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "info": "Optional. Use for team group labels like \"Account Team\"."
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured person image"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Mike Volchok"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "President"
+    },
+    {
+      "type": "richtext",
+      "id": "bio",
+      "label": "Bio",
+      "default": "<p>Mike started in 1993 with a pair of rollerblades and a belief that IT support could be both knowledgable and kind. From his start on his own, he built a consulting business that supported hundreds of clients. In 2007 he opened Mike's Tech Shop, Chelsea's Nice Little Friendly Mac shop. Finally, Mike launched MTS Pro Services to provide Managed IT Services to small and medium businesses. While Mike's name is on the door, the credit of all MTS's success goes mostly to the incredible team of people who deliver the services every day.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Our People — Profile (featured)",
+      "settings": {
+        "show_background": true,
+        "show_gear": true,
+        "name": "Mike Volchok",
+        "title": "President"
+      }
+    },
+    {
+      "name": "MTS Our People — Profile (with team)",
+      "settings": {
+        "heading": "Account Team",
+        "name": "Amanda Laluk",
+        "title": "Director, Account Management",
+        "bio": "<p>With over three decades in enterprise technology, including stints at IBM, WPP and a range of consulting engagements, Aaron has spent his career building, securing, and rationalizing the systems that businesses actually run on. Outside of work, he's usually deep in a history book, a sci-fi or fantasy novel, or a tabletop game. He picked up Dungeons & Dragons at age seven and never put it down; 45 years on, he's still rolling dice with the friends he made in high school.</p>"
+      },
+      "blocks": [
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Juan Nazario",
+            "title": "Account Manager"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Kenny Carmichael",
+            "title": "Account Manager"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

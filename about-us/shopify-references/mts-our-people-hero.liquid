@@ -1,0 +1,134 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-secondary-color: rgba(78, 168, 195, 1);
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero {
+    padding: 64px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    {% if section.settings.background_image != blank %}
+      background-image:
+        linear-gradient(rgba(225, 225, 225, 0.9), rgba(225, 225, 225, 0.9)),
+        url('{{ section.settings.background_image | image_url: width: 2400 }}');
+    {% else %}
+      background-image: linear-gradient(rgba(225, 225, 225, 0.9), rgba(225, 225, 225, 0.9));
+    {% endif %}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero .page-width {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-hero {
+      padding: 100px 0;
+    }
+
+    #shopify-section-{{ section.id }} .mts-our-people-hero .page-width {
+      flex-direction: column;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero h2 {
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero h2 .highlight-light-blue {
+    color: var(--mts-secondary-color);
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-hero h2 {
+      font-size: 42px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero .rte {
+    font-size: 18px;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 32px 0 0 0;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-hero .mts-our-people-hero-image img {
+    max-width: 260px;
+    height: auto;
+  }
+{%- endstyle -%}
+
+<div class="mts-our-people-hero" role="region" aria-labelledby="mts-our-people-hero-heading-{{ section.id }}">
+  <div class="page-width">
+    <div class="mts-our-people-hero-content">
+      {% if section.settings.heading != blank %}
+        <h2 id="mts-our-people-hero-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <div class="rte">{{ section.settings.body }}</div>
+      {% endif %}
+    </div>
+    {% if section.settings.hero_image != blank %}
+      <div class="mts-our-people-hero-image">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 520 }}"
+          alt="{{ section.settings.hero_image.alt | escape }}"
+          width="{{ section.settings.hero_image.width }}"
+          height="{{ section.settings.hero_image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Our People — Hero",
+  "tag": "section",
+  "class": "section-mts-our-people-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Rollerblading Computer Guy Is Still Here, <span class=\"highlight-light-blue\">He Just Has a Bigger Team.</span>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>In the early 90s, Michael Volchok was the guy rollerblading throughout Manhattan with a toolkit, fixing Macs for businesses that had no idea what to do with them. No branded van. No ticketing system. Just a kid who genuinely loved Macs, showing up to solve problems before anyone else was paying attention to Macs at all.</p><p>That was 1993. The rollerblades are retired. <strong>The obsession with Macs is not.</strong></p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Our People — Hero"
+    }
+  ]
+}
+{% endschema %}

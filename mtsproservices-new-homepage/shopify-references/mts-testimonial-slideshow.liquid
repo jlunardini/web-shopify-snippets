@@ -1,0 +1,284 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-slider-bg: {{ section.settings.background_color }};
+    --mts-slider-border: {{ section.settings.border_color }};
+    --mts-slider-text: {{ section.settings.text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-slider {
+    padding: 32px 0;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-slider-card {
+    background: var(--mts-slider-bg);
+    border: 2px solid var(--mts-slider-border);
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-track {
+    display: flex;
+    transition: transform 0.35s ease;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-slide {
+    min-width: 100%;
+    padding: 56px 0 96px;
+    box-sizing: border-box;
+    color: var(--mts-slider-text);
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-slide-inner {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    column-gap: 28px;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-image-wrap {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-quote {
+    margin: 0;
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.05;
+    font-weight: 700;
+    max-width: 900px;
+    text-wrap: balance;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-attribution {
+    margin-top: 14px;
+    font-size: 25px;
+    line-height: 1.25;
+    opacity: 0.95;
+    font-style: italic;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-controls {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-control {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--mts-slider-text);
+    font-size: 58px;
+    line-height: 1;
+    width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.95;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-control:hover {
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .mts-testimonial-control:focus-visible {
+    outline: 2px solid var(--mts-slider-text);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .mts-testimonial-slide {
+      padding: 42px 0 86px;
+    }
+
+    #shopify-section-{{ section.id }} .mts-testimonial-slide-inner {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    #shopify-section-{{ section.id }} .mts-testimonial-quote {
+      font-size: clamp(28px, 6vw, 40px);
+    }
+  }
+{%- endstyle -%}
+
+<div class="mts-testimonial-slider" data-slider-root>
+  <div class="mts-testimonial-slider-card" role="region" aria-label="{{ section.settings.aria_label | escape }}">
+    <div class="mts-testimonial-track" data-slider-track>
+      {% for block in section.blocks %}
+        <article class="mts-testimonial-slide" {{ block.shopify_attributes }}>
+          <div class="page-width mts-testimonial-slide-inner">
+            <div class="mts-testimonial-image-wrap">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 400
+                  | image_tag:
+                    class: 'mts-testimonial-image',
+                    loading: 'lazy',
+                    widths: '170, 340, 400',
+                    sizes: '170px',
+                    alt: block.settings.name
+                }}
+              {% endif %}
+            </div>
+            <div>
+              <p class="mts-testimonial-quote">"{{ block.settings.quote | escape }}"</p>
+              <div class="mts-testimonial-attribution">
+                {% if block.settings.name != blank %}-{{ block.settings.name }}{% endif %}
+                {% if block.settings.role != blank -%}
+                  <br>
+                  {{ block.settings.role -}}
+                {%- endif %}
+              </div>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    {% if section.blocks.size > 1 %}
+      <div class="mts-testimonial-controls">
+        <button type="button" class="mts-testimonial-control" data-slider-prev aria-label="Previous testimonial">
+          &larr;
+        </button>
+        <button type="button" class="mts-testimonial-control" data-slider-next aria-label="Next testimonial">
+          &rarr;
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionRoot) return;
+
+    var track = sectionRoot.querySelector('[data-slider-track]');
+    var prev = sectionRoot.querySelector('[data-slider-prev]');
+    var next = sectionRoot.querySelector('[data-slider-next]');
+    if (!track || !prev || !next) return;
+
+    var index = 0;
+    var total = track.children.length;
+
+    function render() {
+      track.style.transform = 'translateX(-' + index * 100 + '%)';
+    }
+
+    prev.addEventListener('click', function () {
+      index = (index - 1 + total) % total;
+      render();
+    });
+
+    next.addEventListener('click', function () {
+      index = (index + 1) % total;
+      render();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MTS Testimonial Slideshow",
+  "tag": "section",
+  "class": "section-mts-testimonial-slideshow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Client testimonial slider"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#16A4C0"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#6F4CC6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#E7EDEE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Headshot"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The team at MTS has been a valuable asset and a true partner to Relay Network as it grows."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Joe D."
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / company",
+          "default": "Operations Manager - Relay Network"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Testimonial Slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "quote": "MTS has helped us keep Apple management stable while we scale quickly.",
+            "name": "Alex P.",
+            "role": "IT Director - Example Co."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

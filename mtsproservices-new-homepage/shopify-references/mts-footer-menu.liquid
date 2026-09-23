@@ -1,0 +1,325 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-footer-bg: {{ section.settings.background_color }};
+    --mts-footer-text: {{ section.settings.text_color }};
+    --mts-footer-link: {{ section.settings.link_color }};
+    --mts-footer-link-hover: {{ section.settings.link_hover_color }};
+    background: var(--mts-footer-bg);
+    color: var(--mts-footer-text);
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 32px 40px;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .mts-footer-menu__grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__heading {
+    margin: 0 0 14px;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--mts-footer-text);
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__heading--brand {
+    font-size: {{ section.settings.brand_heading_size }}px;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} a.mts-footer-menu__heading-link {
+    display: block;
+    margin: 0 0 14px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} a.mts-footer-menu__heading-link:hover {
+    color: var(--mts-footer-link-hover);
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__link {
+    color: var(--mts-footer-link);
+    text-decoration: none;
+    font-size: {{ section.settings.link_size }}px;
+    line-height: 1.35;
+    transition: color 0.15s ease;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__link:hover {
+    color: var(--mts-footer-link-hover);
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .mts-footer-menu__external {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.85em;
+    text-decoration: none;
+  }
+{%- endstyle -%}
+
+<div class="page-width">
+  <div class="mts-footer-menu__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'column' %}
+            <nav class="mts-footer-menu__col" aria-label="{{ block.settings.heading | escape }}" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                {% if block.settings.heading_link != blank %}
+                  <a
+                    class="mts-footer-menu__heading mts-footer-menu__heading-link{% if block.settings.style == 'brand' %} mts-footer-menu__heading--brand{% endif %}"
+                    href="{{ block.settings.heading_link }}"
+                  >
+                    {{ block.settings.heading | escape }}
+                  </a>
+                {% else %}
+                  <p class="mts-footer-menu__heading{% if block.settings.style == 'brand' %} mts-footer-menu__heading--brand{% endif %}">
+                    {{ block.settings.heading | escape }}
+                  </p>
+                {% endif %}
+              {% endif %}
+              {% if block.settings.menu != blank and block.settings.menu.links.size > 0 %}
+                <ul class="mts-footer-menu__list">
+                  {% for link in block.settings.menu.links %}
+                    {%- liquid
+                      assign link_open_external = false
+                      if link.url contains '://'
+                        unless link.url contains shop.url
+                          assign link_open_external = true
+                        endunless
+                      endif
+                    -%}
+                    <li>
+                      <a
+                        class="mts-footer-menu__link"
+                        href="{{ link.url }}"
+                        {% if link.active %}aria-current="page"{% endif %}
+                        {% if link_open_external %}target="_blank" rel="noopener noreferrer"{% endif %}
+                      >
+                        {{- link.title | escape -}}
+                        {% if block.settings.show_external_icon %}
+                          <span class="mts-footer-menu__external" aria-hidden="true">↗</span>
+                        {% endif %}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </nav>
+        {% endcase %}
+      {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Footer menu",
+  "tag": "footer",
+  "class": "mts-footer-menu section-mts-footer-menu",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#3d4a57"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link text",
+      "default": "#e8eef2"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "label": "Columns on large screens",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Column heading size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "brand_heading_size",
+      "min": 14,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Brand column heading size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Link size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Section title"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Heading style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "brand", "label": "Brand (larger)" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "url",
+          "id": "heading_link",
+          "label": "Heading link",
+          "info": "Optional. Makes the heading a link (e.g. Store → /products)."
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Links menu",
+          "info": "Create menus in Online Store > Navigation, then assign one per column."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_external_icon",
+          "label": "Show ↗ after each link",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Footer menu",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "heading": "MTS Pro Services",
+            "style": "brand"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Store",
+            "heading_link": "/products"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "IT Services"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Hardware Services"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Existing Clients",
+            "show_external_icon": true
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Repairs",
+            "show_external_icon": true
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "About"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

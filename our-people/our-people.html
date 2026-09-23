@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTS Pro Services - New Home Exploration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --secondary-color: rgba(78, 168, 195, 1);
+        --secondary-color-hover: rgba(78, 168, 195, 0.8);
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      .our-people-people-section {
+        padding: 60px 100px;
+        background: white;
+      }
+
+      .our-people-people-section-inner {
+        display: flex;
+        gap: 48px;
+        align-items: center;
+      }
+
+      @media (max-width: 1024px) {
+        .our-people-people-section-inner {
+          flex-direction: column;
+        }
+      }
+
+      .optional-background {
+        background-color: #e8e3e2;
+        position: relative;
+      }
+
+      .optional-gear {
+        display: none;
+      }
+
+      .optional-background .optional-gear {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 20%;
+        height: 100%;
+        opacity: 0.75;
+        max-height: 420px;
+      }
+
+      @media (max-width: 1024px) {
+        .our-people-people-section .optional-gear {
+          display: none;
+        }
+      }
+
+      .our-people-people-section img:first-of-type {
+        object-fit: cover;
+        width: 378px;
+        height: 337px;
+      }
+
+      @media (max-width: 1024px) {
+        .our-people-people-section img:first-of-type {
+          margin: 0 auto 0 0;
+        }
+      }
+
+      .our-people-people-section-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        position: relative;
+        justify-content: center;
+        z-index: 2;
+      }
+
+      .our-people-people-section .name {
+        font-weight: 700;
+        font-size: 26px;
+        margin: 0;
+      }
+
+      .our-people-people-section .title {
+        font-weight: 500;
+        font-size: 26px;
+        margin: 0;
+      }
+
+      .our-people-people-section .bio {
+        font-weight: 400;
+        font-size: 18px;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .our-people-people-section .optional-heading {
+        font-weight: 700;
+        font-size: 50px;
+        margin: 0;
+        margin-bottom: 36px;
+        width: 100%;
+      }
+
+      .our-people-people-section .team-members {
+        display: flex;
+        flex-direction: row;
+        gap: 28px;
+        margin-top: 56px;
+        flex-wrap: wrap;
+      }
+
+      .our-people-people-section .member-col {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .our-people-people-section .member-col img {
+        width: 176px;
+        height: 210px;
+        object-fit: cover;
+      }
+
+      .our-people-people-section .member-col .name {
+        font-weight: 700;
+        font-size: 20px;
+        margin: 0;
+        margin-top: 16px;
+      }
+
+      .our-people-people-section .member-col .title {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="our-people-people-section optional-background">
+      <img class="optional-gear" src="../assets/gear-gray.svg" alt="Gear" />
+      <div class="our-people-people-section-inner">
+        <img src="../assets/nyc-background.PNG" alt="NYC Background" />
+        <div class="our-people-people-section-content">
+          <h2 class="name">Mike Volchok</h2>
+          <p class="title">President</p>
+          <p class="bio">
+            Mike started in 1993 with a pair of rollerblades and a belief that
+            IT support could be both knowledgable and kind. From his start on
+            his own, he built a consulting business that supported hundreds of
+            clients. In 2007 he opened Mike's Tech Shop, Chelsea's Nice Little
+            Friendly Mac shop. Finally, Mike launched MTS Pro Services to
+            provide Managed IT Services to small and medium businesses. While
+            Mike's name is on the door, the credit of all MTS's success goes
+            mostly to the incredible team of people who deliver the services
+            every day.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="our-people-people-section">
+      <h2 class="optional-heading">Account Team</h2>
+      <div class="our-people-people-section-inner">
+        <img src="../assets/nyc-background.PNG" alt="NYC Background" />
+        <div class="our-people-people-section-content">
+          <h2 class="name">Amanda Laluk</h2>
+          <p class="title">Director, Account Management</p>
+          <p class="bio">
+            With over three decades in enterprise technology, including stints
+            at IBM, WPP and a range of consulting engagements, Aaron has spent
+            his career building, securing, and rationalizing the systems that
+            businesses actually run on. Outside of work, he's usually deep in a
+            history book, a sci-fi or fantasy novel, or a tabletop game. He
+            picked up Dungeons & Dragons at age seven and never put it down; 45
+            years on, he's still rolling dice with the friends he made in high
+            school.
+          </p>
+        </div>
+      </div>
+      <div class="team-members">
+        <div class="member-col">
+          <img src="../assets/nyc-background.PNG" alt="NYC Background" />
+          <p class="name">Juan Nazario</p>
+          <p class="title">Account Manager</p>
+        </div>
+        <div class="member-col">
+          <img src="../assets/nyc-background.PNG" alt="NYC Background" />
+          <p class="name">Kenny Carmichael</p>
+          <p class="title">Account Manager</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

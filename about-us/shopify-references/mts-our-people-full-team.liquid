@@ -1,0 +1,205 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --mts-secondary-color: rgba(78, 168, 195, 1);
+    --mts-secondary-color-hover: rgba(78, 168, 195, 0.8);
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team {
+    position: relative;
+    padding: 100px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: white;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team .page-width {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-full-team {
+      padding: 100px 0;
+    }
+
+    #shopify-section-{{ section.id }} .mts-our-people-full-team .page-width {
+      flex-direction: column;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team-content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team h2 {
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team h2 .highlight-light-blue {
+    color: var(--mts-secondary-color);
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-full-team h2 {
+      font-size: 42px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team .rte {
+    font-size: 26px;
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 32px 0 0 0;
+    text-wrap: pretty;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team .rte a {
+    color: var(--mts-secondary-color);
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team-image img {
+    max-width: 500px;
+    height: auto;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .mts-our-people-full-team-image {
+      display: none;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team-button {
+    display: inline-block;
+    background-color: var(--mts-secondary-color);
+    color: #ffffff !important;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 140px;
+    text-decoration: none !important;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 24px auto 0 0;
+    transition: background-color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .mts-our-people-full-team-button:hover {
+    background-color: var(--mts-secondary-color-hover);
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear {
+    position: absolute;
+    top: -10px;
+    left: max(1.5rem, env(safe-area-inset-left, 0px));
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .mts-absolute-gear img {
+    height: 500px;
+    width: 400px;
+    object-fit: contain;
+  }
+{%- endstyle -%}
+
+<div class="mts-our-people-full-team" role="region" aria-labelledby="mts-our-people-full-team-heading-{{ section.id }}">
+  {% if section.settings.decor_image != blank %}
+    <div class="mts-absolute-gear" aria-hidden="true">
+      <img
+        src="{{ section.settings.decor_image | image_url: width: 800 }}"
+        alt=""
+        width="{{ section.settings.decor_image.width }}"
+        height="{{ section.settings.decor_image.height }}"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
+  <div class="page-width">
+    <div class="mts-our-people-full-team-content">
+      {% if section.settings.heading != blank %}
+        <h2 id="mts-our-people-full-team-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <div class="rte">{{ section.settings.body }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        <a class="mts-our-people-full-team-button" href="{{ section.settings.button_link }}">
+          {{- section.settings.button_label -}}
+        </a>
+      {% endif %}
+    </div>
+    {% if section.settings.team_image != blank %}
+      <div class="mts-our-people-full-team-image">
+        <img
+          src="{{ section.settings.team_image | image_url: width: 1000 }}"
+          alt="{{ section.settings.team_image.alt | escape }}"
+          width="{{ section.settings.team_image.width }}"
+          height="{{ section.settings.team_image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MTS Our People — Full Team",
+  "tag": "section",
+  "class": "section-mts-our-people-full-team",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "decor_image",
+      "label": "Decorative gear image"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From One Guy to a Full Team. <span class=\"highlight-light-blue\">Same DNA.</span>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>MTS Pro Services started as a one-person Mac support operation in New York City. Over 30 years, it grew into a full-scale managed services firm with capabilities that most IT teams can't match in-house. But the thing that's never changed is the kind of people who work here.</p><p>Today, the team runs <a href=\"https://talosfleet.com\">Talos Fleet Management</a> deployments across 4,000+ Mac endpoints. We have more Jamf-certified techs than most Fortune 500 companies. And we still respond directly to clients.</p><p>That's not a coincidence. It's the same attitude Mike had rolling through the streets of Manhattan: Show up, figure it out, and fix it.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Meet The Team"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "team_image",
+      "label": "Team image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTS Our People — Full Team"
+    }
+  ]
+}
+{% endschema %}

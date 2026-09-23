@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTS Pro Services - New Home Exploration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --secondary-color: rgba(78, 168, 195, 1.000);
+            --secondary-color-hover: rgba(78, 168, 195, 0.800);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .highlight-light-blue {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section  */
+        .our-people-hero {
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 64px;
+            background-image:
+                linear-gradient(rgba(225, 225, 225, 0.9), rgba(225, 225, 225, 0.9)),
+                url('../assets/nyc-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 1024px) {
+            .our-people-hero {
+                flex-direction: column;
+                padding: 100px 48px;
+            }
+        }
+
+        .our-people-hero h2 {
+            font-size: 32px;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Source Sans 3', sans-serif;
+            text-wrap: pretty;
+        }
+
+        @media (max-width: 1024px) {
+            .our-people-hero h2 {
+                font-size: 42px;
+            }
+        }
+
+        .our-people-hero p {
+            font-size: 18px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 32px 0 0 0;
+            text-wrap: pretty;
+        }
+
+        .our-people-hero img {
+            max-width: 260px;
+        }
+
+        /* Video Display */
+        .video-display {
+            padding: 64px 120px;
+            display: flex;
+            flex-direction: column;
+            background: rgb(93, 108, 127);
+            color: #ffffff;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 18px;
+            text-wrap: pretty;
+            line-height: 1.25;
+            font-weight: 300;
+        }
+
+        .full-team {
+            position: relative;
+            padding: 100px 120px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            background: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 1024px) {
+            .full-team {
+                flex-direction: column;
+                padding: 100px 48px;
+            }
+        }
+
+        .full-team-content {
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .full-team h2 {
+            font-size: 48px;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Source Sans 3', sans-serif;
+            text-wrap: pretty;
+        }
+
+        @media (max-width: 1024px) {
+            .full-team h2 {
+                font-size: 42px;
+            }
+        }
+
+        .full-team p {
+            font-size: 26px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 32px 0 0 0;
+            text-wrap: pretty;
+        }
+
+        .full-team img {
+            max-width: 500px;
+        }
+
+        @media (max-width: 1024px) {
+            .full-team img {
+                display: none;
+            }
+        }
+
+        .full-team a {
+            color: var(--secondary-color);
+        }
+
+
+        .full-team-button {
+            background-color: var(--secondary-color);
+            color: #ffffff !important;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 140px;
+            text-decoration: none !important;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            margin: 24px auto 0 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .full-team-button:hover {
+            background-color: var(--secondary-color-hover);
+        }
+
+        .full-team .absolute-gear {
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            z-index: 0;
+        }
+
+        .full-team .absolute-gear img {
+            height: 500px;
+            width: 400px;
+            object-fit: contain;
+        }
+
+
+
+        /* Footer CTA Banner */
+        .footer-cta-banner {
+            padding: 120px 120px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: white;
+        }
+
+        .footer-cta-banner h2 {
+            font-size: 46px;
+            line-height: 1;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin: 0;
+            text-wrap: pretty;
+            z-index: 1;
+        }
+
+        .footer-cta-banner p {
+            font-size: 24px;
+            font-family: 'Source Sans 3', sans-serif;
+            margin: 0;
+            margin-top: 24px;
+            max-width: 600px;
+            text-wrap: pretty;
+            z-index: 1;
+        }
+
+        .footer-cta-banner button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 140px;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            margin: 64px auto 0 auto;
+            align-self: flex-start;
+            transition: background-color 0.3s ease;
+            z-index: 1;
+        }
+
+        .footer-cta-banner button:hover {
+            background-color: var(--secondary-color-hover);
+        }
+
+        .absolute-gear-footer {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            z-index: 0;
+        }
+
+        .absolute-gear-footer img {
+            height: 500px;
+            width: 400px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="our-people-hero">
+        <div class="our-people-hero-content">
+            <h2>
+                The Rollerblading Computer
+                Guy Is Still Here, <span class="highlight-light-blue">He Just Has a
+                    Bigger Team.</span>
+            </h2>
+            <p>In the early 90s, Michael Volchok was the guy
+                rollerblading throughout Manhattan with a toolkit, fixing
+                Macs for businesses that had no idea what to do with
+                them. No branded van. No ticketing system. Just a kid
+                who genuinely loved Macs, showing up to solve problems
+                before anyone else was paying attention to Macs at all.</p>
+            <br>
+            <p>That was 1993. The rollerblades are retired. <strong>The
+                    obsession with Macs is not.</strong></p>
+        </div>
+        <div class="our-people-hero-image">
+            <img src="../assets/mike-wsj.webp" alt="Mike WSJ">
+        </div>
+    </section>
+    <section class="video-display">
+        <h2>The Computer Wore Rollerblades:<br> Mike on ABC News in 1996</h2>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/youtube-video-element/+esm"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/player.style/sutro/+esm"></script>
+        <media-theme-sutro
+            style="--media-primary-color: #F9F9F9; width:90%;border-radius:12px !important; margin:0 auto; margin-top:16px;">
+            <youtube-video style="min-height:400px;border-radius:12px !important;" slot="media"
+                src="https://www.youtube.com/watch?v=hLslmilsanM" playsinline crossorigin></youtube-video>
+        </media-theme-sutro>
+    </section>
+    <section class="full-team">
+        <div class="absolute-gear">
+            <img src="../assets/gear-gray.svg" alt="Gear">
+        </div>
+        <div class="full-team-content">
+            <h2>From One Guy to a Full Team. <span class="highlight-light-blue">Same DNA.</span></h2>
+            <p>MTS Pro Services started as a one-person Mac support
+                operation in New York City. Over 30 years, it grew into a full-
+                scale managed services firm with capabilities that most IT
+                teams can’t match in-house. But the thing that’s never
+                changed is the kind of people who work here.</p>
+            <br>
+            <p>
+                Today, the team runs <a href="https://talosfleet.com">Talos Fleet Management</a>
+                deployments across 4,000+ Mac endpoints. We have more
+                Jamf-certified techs than most Fortune 500 companies. And
+                we still respond directly to clients.
+            </p>
+            <br>
+            <p>
+                That’s not a coincidence. It’s the same attitude Mike had
+                rolling through the streets of Manhattan: Show up, figure it
+                out, and fix it.
+            </p>
+            <a class="full-team-button" href="/our-people">Meet The Team</a>
+        </div>
+        <div class="full-team-image">
+            <img src="../assets/two-mikes.png" alt="Portait of Mike Volchok">
+        </div>
+    </section>
+    <section class="footer-cta-banner">
+        <div class="absolute-gear-footer">
+            <img src="../assets/gear-gray.svg" alt="Gear">
+        </div>
+        <h2>Ready To Work With Someone Who Actually Gets Macs? </h2>
+        <p>Let’s start with a conversation. Tell us where things stand,
+            and we’ll take it from there.</p>
+        <button>Get Your Reality Check</button>
+    </section>
+
+</body>
+
+</html>
